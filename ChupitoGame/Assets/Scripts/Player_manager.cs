@@ -68,9 +68,13 @@ public class Player_manager : MonoBehaviour
         my_shoulder.Update(Time.deltaTime);
         my_elbow_up.Update(Time.deltaTime);
         my_elbow_down.Update(Time.deltaTime);
-        drinked_glasses += mouth.GetDrinkedGlass();
-        alcohol_stamina = drinked_glasses * 10;
-        BarraborrachoLeft.fillAmount = (alcohol_stamina * MAX_ALCOHOL_STAMINA) / 100;
+        if (mouth.GetDrinkedGlass()) {
+            drinked_glasses++;
+            alcohol_stamina = drinked_glasses * 25;
+        };
+        alcohol_stamina = alcohol_stamina - 0.05 < 0 ? 0 : alcohol_stamina - 0.05F;
+        BarraborrachoLeft.fillAmount = (alcohol_stamina / MAX_ALCOHOL_STAMINA);
+
         
 
         

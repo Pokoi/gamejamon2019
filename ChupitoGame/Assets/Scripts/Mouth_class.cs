@@ -22,17 +22,17 @@ public class Mouth_class : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<Glass>().GetContentGlass())
             {
-
                 drinked_glasses++;                
                 collision.gameObject.GetComponent<Glass>().DrinkGlass();
             }
         }
         
     }
-    public int GetDrinkedGlass()
+    public bool GetDrinkedGlass()
     {
         int glasses = drinked_glasses;
         drinked_glasses = 0;
-        return glasses;
+        
+        return glasses > 0;
     }
 }

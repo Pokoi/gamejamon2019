@@ -77,7 +77,8 @@ public class Glass : MonoBehaviour
             #region Lanzamiento
             else
             {
-                if (Input.GetKeyDown(KeyCode.Space) && !onAir) {
+                if (Input.GetKeyDown(KeyCode.Space) && !onAir)
+                {
                     ThrowRigidbody();
                 }
             }
@@ -85,7 +86,7 @@ public class Glass : MonoBehaviour
 
             #region ComprobarVision
             if (transform.position.y < table.transform.position.y - 2)
-                GlassManager.RemoveGlass(this.gameObject);
+                destroy();
             #endregion
         }
 
@@ -117,10 +118,15 @@ public class Glass : MonoBehaviour
         rb.AddForce(rb.transform.right * force_magnitude * multiplicador, ForceMode2D.Impulse);
         rb.AddTorque(force_magnitude * torque_multiplier);
         this.transform.parent = GlassManager.poolGlass.transform;
+        Invoke("destroy", 5);
 
     }
     public bool GetContentGlass() { return full; }
     public void DrinkGlass() { full = false; }
+    public void destroy() {
+        CancelInvoke("destroy");
+        GlassManager.RemoveGlass(this.gameObject);
+    }
 
 
 
