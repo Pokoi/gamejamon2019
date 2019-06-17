@@ -94,7 +94,10 @@ public class Glass : MonoBehaviour
         GlassManager = _padre.GetComponent<GlassManager>();
         IsLeft = GlassManager.direccionDeSpawnIsLeft;
         if (rb != null)
+        {
+            rb.isKinematic = false;
             rb.WakeUp();
+        }
         hand = null;
         onAir = false;
     }

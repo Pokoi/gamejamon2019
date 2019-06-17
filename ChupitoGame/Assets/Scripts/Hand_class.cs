@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hand_class : Joints_class
+public class Hand_class : MonoBehaviour
 {
     //Sprite de la mano
     private SpriteRenderer sprite;
@@ -42,6 +42,7 @@ public class Hand_class : Joints_class
             glassComponent.hand = this.gameObject;
             glassComponent.agarrado = true;
             glassComponent.gameObject.GetComponent<Rigidbody2D>().Sleep();
+            glassComponent.gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
         }
     }
 

@@ -41,7 +41,7 @@ public class GlassManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.C))
             spawnGlass();
     }
 
