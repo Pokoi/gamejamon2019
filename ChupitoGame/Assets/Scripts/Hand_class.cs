@@ -37,10 +37,11 @@ public class Hand_class : MonoBehaviour
     private void OnTriggerStay2D(Collider2D other)
     {
         var glassComponent = other.gameObject.GetComponent<Glass>();
-        if (agarrando && glassComponent != null && this.transform.childCount <= 0) {
+        if (agarrando && glassComponent != null && this.transform.childCount <= 0 && glassComponent.hand != this.gameObject) {
             other.gameObject.transform.parent = this.transform;
+            glassComponent.hand = this.gameObject;
             glassComponent.agarrado = true;
-            glassComponent.rb.Sleep();
+            glassComponent.gameObject.GetComponent<Rigidbody2D>().Sleep();
         }
     }
 

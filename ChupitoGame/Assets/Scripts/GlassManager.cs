@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -16,6 +17,10 @@ public class GlassManager : MonoBehaviour
     public List<GameObject> objetosActivos;
     public List<GameObject> objetosDesactivados;
 
+    //PoolGlass
+    [HideInInspector]
+    public GameObject poolGlass;
+
 
     // Start is called before the first frame update
     void Start()
@@ -23,14 +28,21 @@ public class GlassManager : MonoBehaviour
         //Cargamos el vaso de la carpeta Resources/Props
         glass = Resources.Load<GameObject>("Props/Glass");
         //Inicializamos las listas para el OP
-        objetosActivos = objetosDesactivados = new List<GameObject>();
+        objetosActivos = new List<GameObject>();
+        objetosDesactivados = new List<GameObject>();
+        //Creamos el objeto pool
+        poolGlass = new GameObject();
+        poolGlass.name = "PoolGlass";
+        Instantiate(poolGlass, originPosition, Quaternion.identity);
+
         spawnGlass();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.A))
+            spawnGlass();
     }
 
     /// <summary>
@@ -38,18 +50,28 @@ public class GlassManager : MonoBehaviour
     /// </summary>
     public void spawnGlass()
     {
-        if (objetosDesactivados.Count <= 0)
+        if (objetosDesactivados.Count == 0)
         {
             objetosActivos.Add(Instantiate(glass, originPosition, Quaternion.identity));
-            objetosActivos.Last().GetComponent<Glass>().GlassManager = this;
-            objetosActivos.Last().GetComponent<Glass>().IsLeft = direccionDeSpawnIsLeft;
-
+            objetosActivos.Last().GetComponent<Glass>().restartObject(this.gameObject);
         }
         else
         {
             objetosActivos.Add(objetosDesactivados.First());
             objetosDesactivados.Remove(objetosDesactivados.First());
             objetosActivos.Last().transform.position = originPosition;
+            objetosActivos.Last().GetComponent<Glass>().restartObject(this.gameObject);
         }
+    }
+
+    internal void RemoveGlass(GameObject _toRemove)
+    {
+
+        _toRemove.GetComponent<Rigidbody2D>().Sleep();
+        _toRemove.GetComponent<Glass>().isActive = false;
+        _toRemove.SetActive(false);
+        _toRemove.transform.parent = poolGlass.transform;
+        objetosDesactivados.Add(_toRemove);
+        objetosActivos.Remove(_toRemove);
     }
 }
