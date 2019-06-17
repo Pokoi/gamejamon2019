@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Player_manager : MonoBehaviour
 {
+    public BoxCollider2D mouth;
     #region player states
     public float alcohol_stamina;
     public float sake;
     public float vodka;
     public float ron;
+    public float whisky;
+    public float vino;
     #endregion
 
     #region shoulder
@@ -54,4 +57,5 @@ public class Player_manager : MonoBehaviour
 
         
     }
+
 }
