@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Mouth_class : MonoBehaviour
 {
-    private BoxCollider2D my_collider;
+    private int drinked_glasses;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,5 +15,23 @@ public class Mouth_class : MonoBehaviour
     void Update()
     {
         
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<Glass>())
+        {
+            if (collision.gameObject.GetComponent<Glass>().GetContentGlass())
+            {
+                drinked_glasses++;
+                collision.gameObject.GetComponent<Glass>().DrinkGlass();
+            }
+        }
+        
+    }
+    public int GetDrinkedGlass()
+    {
+        int glasses = drinked_glasses;
+        drinked_glasses = 0;
+        return glasses;
     }
 }

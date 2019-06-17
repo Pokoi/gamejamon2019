@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Player_manager : MonoBehaviour
 {
-    public BoxCollider2D mouth;
+    public GameObject body;
+    private Mouth_class mouth;
     #region player states
     public float alcohol_stamina;
+    public int drinked_glasses;
     public float sake;
     public float vodka;
     public float ron;
@@ -39,13 +41,14 @@ public class Player_manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mouth = body.GetComponent<Mouth_class>();
         my_shoulder = new Shoulder_class();
         my_elbow_up = new Elbow_up_class();
         my_elbow_down = new Elbow_down_class();
         my_shoulder.Start(my_shoulder_transform, max_angle_shoulder, min_angle_shoulder, active_key_shoulder, aceleration_axis_shoulder,speed_animation_shoulder);
         my_elbow_up.Start(my_elbow_transform, max_angle_elbow, min_angle_elbow, active_key_elbow_up, aceleration_axis_elbow,speed_animation_elbow);
         my_elbow_down.Start(my_elbow_transform, max_angle_elbow, min_angle_elbow, active_key_elbow_down, aceleration_axis_elbow,speed_animation_elbow);
-        
+        drinked_glasses = 0;
     }
 
     // Update is called once per frame
@@ -54,6 +57,8 @@ public class Player_manager : MonoBehaviour
         my_shoulder.Update(Time.deltaTime);
         my_elbow_up.Update(Time.deltaTime);
         my_elbow_down.Update(Time.deltaTime);
+        drinked_glasses += mouth.GetDrinkedGlass();
+        
 
         
     }

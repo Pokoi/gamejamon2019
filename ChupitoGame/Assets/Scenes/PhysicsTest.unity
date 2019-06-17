@@ -354,6 +354,31 @@ PrefabInstance:
       propertyPath: mouth
       value: 
       objectReference: {fileID: 1982771319}
+    - target: {fileID: 4158063023145208538, guid: 435295b4bc00d7c418c274a6e50dbd94,
+        type: 3}
+      propertyPath: body
+      value: 
+      objectReference: {fileID: 1982771316}
+    - target: {fileID: 4158063023145208538, guid: 435295b4bc00d7c418c274a6e50dbd94,
+        type: 3}
+      propertyPath: speed_animation_shoulder
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4158063023145208538, guid: 435295b4bc00d7c418c274a6e50dbd94,
+        type: 3}
+      propertyPath: max_angle_elbow
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4158063023145208538, guid: 435295b4bc00d7c418c274a6e50dbd94,
+        type: 3}
+      propertyPath: min_angle_elbow
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4158063023145208538, guid: 435295b4bc00d7c418c274a6e50dbd94,
+        type: 3}
+      propertyPath: speed_animation_elbow
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 435295b4bc00d7c418c274a6e50dbd94, type: 3}
 --- !u!4 &302339434 stripped
@@ -824,7 +849,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.3359151, y: 2.127243}
