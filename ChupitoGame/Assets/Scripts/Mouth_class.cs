@@ -22,7 +22,8 @@ public class Mouth_class : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<Glass>().GetContentGlass())
             {
-                drinked_glasses++;
+
+                drinked_glasses++;                
                 collision.gameObject.GetComponent<Glass>().DrinkGlass();
             }
         }
