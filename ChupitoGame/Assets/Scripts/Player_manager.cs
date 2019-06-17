@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player_manager : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class Player_manager : MonoBehaviour
     #endregion
 
     #region shoulder
-    private Shoulder_class my_shoulder;
+    public Shoulder_class my_shoulder;
     public Transform my_shoulder_transform;
     public float max_angle_shoulder;
     public float min_angle_shoulder;
@@ -22,8 +23,8 @@ public class Player_manager : MonoBehaviour
     #endregion
 
     #region elbow
-    private Elbow_up_class my_elbow_up;
-    private Elbow_down_class my_elbow_down;
+    public Elbow_up_class my_elbow_up;
+    public Elbow_down_class my_elbow_down;
     public Transform my_elbow_transform;
     public float max_angle_elbow;
     public float min_angle_elbow;
@@ -31,6 +32,10 @@ public class Player_manager : MonoBehaviour
     public float speed_animation_elbow;
     public KeyCode active_key_elbow_up;
     public KeyCode active_key_elbow_down;
+    #endregion
+
+    #region HUD
+    private Image BarraborrachoLeft;
     #endregion
 
     // Start is called before the first frame update
@@ -42,6 +47,10 @@ public class Player_manager : MonoBehaviour
         my_shoulder.Start(my_shoulder_transform, max_angle_shoulder, min_angle_shoulder, active_key_shoulder, aceleration_axis_shoulder,speed_animation_shoulder);
         my_elbow_up.Start(my_elbow_transform, max_angle_elbow, min_angle_elbow, active_key_elbow_up, aceleration_axis_elbow,speed_animation_elbow);
         my_elbow_down.Start(my_elbow_transform, max_angle_elbow, min_angle_elbow, active_key_elbow_down, aceleration_axis_elbow,speed_animation_elbow);
+
+        //HUD
+     //   BarraborrachoLeft = GameObject.Find("Fill Amonut Left").GetComponent<Image>();
+
         
     }
 

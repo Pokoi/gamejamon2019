@@ -109,7 +109,9 @@ public class Glass : MonoBehaviour
         onAir = true;
         rb.isKinematic = false;
         rb.WakeUp();
-        rb.AddForce(rb.transform.right * force_magnitude, ForceMode2D.Impulse);
+        var multiplicador = GlassManager.player_manager.my_shoulder.GetAxixValue();
+
+        rb.AddForce(rb.transform.right * force_magnitude * multiplicador, ForceMode2D.Impulse);
         rb.AddTorque(force_magnitude * torque_multiplier);
         this.transform.parent = GlassManager.poolGlass.transform;
 

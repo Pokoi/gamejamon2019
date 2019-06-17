@@ -21,6 +21,9 @@ public class GlassManager : MonoBehaviour
     [HideInInspector]
     public GameObject poolGlass;
 
+    //Brazo
+    public Player_manager player_manager;
+
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +37,8 @@ public class GlassManager : MonoBehaviour
         poolGlass = new GameObject();
         poolGlass.name = "PoolGlass";
         Instantiate(poolGlass, originPosition, Quaternion.identity);
-
+        //Obtenemos el player Manager
+        player_manager = GameObject.Find("TestPerson").GetComponent<Player_manager>();
         spawnGlass();
     }
 

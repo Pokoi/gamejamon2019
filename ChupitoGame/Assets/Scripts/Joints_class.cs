@@ -12,7 +12,7 @@ public abstract class Joints_class
     private float current_angle;
     //el valor del angulo
     private float axis_value = 0;
-    private float max_last_axis_value = 0;
+    public float max_last_axis_value = 0;
     //tecla que acciona la articulación
     public KeyCode active_key;
     //velocidad con la que se incrementa el axis value
@@ -67,17 +67,12 @@ public abstract class Joints_class
     {
         if(my_transform.localEulerAngles.z <= max_angle)
             my_transform.localEulerAngles += new Vector3(0,0,1) * axis_value* speed_animation * deltaTime;
-        Debug.Log(axis_value);
        
-
     }
     protected void RotateDown(float deltaTime)
     {
         if(my_transform.localEulerAngles.z >= min_angle)
             my_transform.localEulerAngles -= new Vector3(0, 0, 1) * axis_value * speed_animation * deltaTime;
-
-        Debug.Log(my_transform.eulerAngles);
-        Debug.Log(axis_value);
 
     }
     protected void RestoreDown(float deltaTime)
