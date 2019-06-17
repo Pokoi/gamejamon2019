@@ -5,11 +5,16 @@ using UnityEngine.UI;
 
 public class Player_manager : MonoBehaviour
 {
+    public GameObject body;
+    private Mouth_class mouth;
     #region player states
     public float alcohol_stamina;
+    public int drinked_glasses;
     public float sake;
     public float vodka;
     public float ron;
+    public float whisky;
+    public float vino;
     #endregion
 
     #region shoulder
@@ -41,6 +46,7 @@ public class Player_manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mouth = body.GetComponent<Mouth_class>();
         my_shoulder = new Shoulder_class();
         my_elbow_up = new Elbow_up_class();
         my_elbow_down = new Elbow_down_class();
@@ -52,6 +58,7 @@ public class Player_manager : MonoBehaviour
      //   BarraborrachoLeft = GameObject.Find("Fill Amonut Left").GetComponent<Image>();
 
         
+        drinked_glasses = 0;
     }
 
     // Update is called once per frame
@@ -60,7 +67,10 @@ public class Player_manager : MonoBehaviour
         my_shoulder.Update(Time.deltaTime);
         my_elbow_up.Update(Time.deltaTime);
         my_elbow_down.Update(Time.deltaTime);
+        drinked_glasses += mouth.GetDrinkedGlass();
+        
 
         
     }
+
 }

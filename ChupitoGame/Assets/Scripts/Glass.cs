@@ -18,6 +18,8 @@ public class Glass : MonoBehaviour
     //GlassManager
     [HideInInspector]
     public GlassManager GlassManager;
+    //indica si el vaso esta lleno o vacio 
+    private bool full;
 
     //Determinar si el objeto esta activo
     [HideInInspector]
@@ -46,6 +48,7 @@ public class Glass : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         render = GetComponent<Renderer>();
         table = GameObject.Find("Table");
+        full = true;
     }
 
     // Update is called once per frame
@@ -116,6 +119,8 @@ public class Glass : MonoBehaviour
         this.transform.parent = GlassManager.poolGlass.transform;
 
     }
+    public bool GetContentGlass() { return full; }
+    public void DrinkGlass() { full = false; }
 
 
 
