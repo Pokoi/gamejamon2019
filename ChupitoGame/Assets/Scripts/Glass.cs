@@ -106,6 +106,8 @@ public class Glass : MonoBehaviour
         }
         hand = null;
         onAir = false;
+        full = true;
+        GetComponent<Collider2D>().isTrigger = false;
     }
 
     private void ThrowRigidbody()
@@ -126,6 +128,10 @@ public class Glass : MonoBehaviour
     public void destroy() {
         CancelInvoke("destroy");
         GlassManager.RemoveGlass(this.gameObject);
+    }
+
+    public void removeCollider() {
+        GetComponent<Collider2D>().isTrigger = true;
     }
 
 

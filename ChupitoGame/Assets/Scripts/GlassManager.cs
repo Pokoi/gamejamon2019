@@ -70,6 +70,9 @@ public class GlassManager : MonoBehaviour
 
     internal void RemoveGlass(GameObject _toRemove)
     {
+        if (objetosActivos.Count <= 1) {
+            spawnGlass();
+        }
 
         _toRemove.GetComponent<Rigidbody2D>().Sleep();
         _toRemove.GetComponent<Glass>().isActive = false;

@@ -24,6 +24,8 @@ public class Mouth_class : MonoBehaviour
             {
                 drinked_glasses++;                
                 collision.gameObject.GetComponent<Glass>().DrinkGlass();
+                collision.gameObject.GetComponent<Glass>().GlassManager.spawnGlass();
+                collision.gameObject.GetComponent<Glass>().removeCollider();
             }
         }
         
