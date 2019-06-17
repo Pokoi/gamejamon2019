@@ -33,6 +33,9 @@ public class Glass : MonoBehaviour
     //Mesa
     private GameObject table;
 
+    //En el aire
+    private bool onAir = true;
+
     //Hand reference
     [HideInInspector]
     public GameObject hand;
@@ -71,7 +74,7 @@ public class Glass : MonoBehaviour
             #region Lanzamiento
             else
             {
-                if (Input.GetMouseButtonDown(0) && hand != null) ThrowRigidbody();
+                if (Input.GetMouseButtonDown(0) && !onAir) ThrowRigidbody();
             }
             #endregion
 
@@ -93,10 +96,12 @@ public class Glass : MonoBehaviour
         if (rb != null)
             rb.WakeUp();
         hand = null;
+        onAir = false;
     }
 
     private void ThrowRigidbody()
     {
+        onAir = true;
         rb.WakeUp();
         rb.AddForce(rb.transform.right * force_magnitude, ForceMode2D.Impulse);
         rb.AddTorque(force_magnitude * torque_multiplier);
