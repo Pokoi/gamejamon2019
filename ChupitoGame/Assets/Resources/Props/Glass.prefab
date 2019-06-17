@@ -95,7 +95,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsLeft: 1
+  agarrado: 0
   GlassManager: {fileID: 0}
+  isActive: 1
+  force_magnitude: 10
+  torque_multiplier: 1
+  hand: {fileID: 0}
 --- !u!50 &3014047744601488604
 Rigidbody2D:
   serializedVersion: 4

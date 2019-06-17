@@ -65,16 +65,16 @@ public abstract class Joints_class
 
     protected void RotateUp(float deltaTime)
     {
-        if(my_transform.eulerAngles.z <= max_angle)
-            my_transform.eulerAngles += new Vector3(0,0,1) * axis_value* speed_animation * deltaTime;
+        if(my_transform.localEulerAngles.z <= max_angle)
+            my_transform.localEulerAngles += new Vector3(0,0,1) * axis_value* speed_animation * deltaTime;
         Debug.Log(axis_value);
        
 
     }
     protected void RotateDown(float deltaTime)
     {
-        if(my_transform.eulerAngles.z >= min_angle)
-            my_transform.eulerAngles -= new Vector3(0, 0, 1) * axis_value * speed_animation * deltaTime;
+        if(my_transform.localEulerAngles.z >= min_angle)
+            my_transform.localEulerAngles -= new Vector3(0, 0, 1) * axis_value * speed_animation * deltaTime;
 
         Debug.Log(my_transform.eulerAngles);
         Debug.Log(axis_value);

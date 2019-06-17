@@ -23,7 +23,7 @@ public class Hand_class : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0)) CatchGlass();
+        if (Input.GetKey(KeyCode.Space)) CatchGlass();
         else { sprite.color = Color.blue; agarrando = false; }
 
     }
