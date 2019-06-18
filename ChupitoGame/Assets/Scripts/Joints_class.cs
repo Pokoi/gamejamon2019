@@ -12,7 +12,7 @@ public abstract class Joints_class
     private float current_angle;
     //el valor del angulo
     private float axis_value = 0;
-    public float max_last_axis_value = 0;
+    public float max_last_axis_value = 1;
     //tecla que acciona la articulación
     public KeyCode active_key;
     //velocidad con la que se incrementa el axis value
