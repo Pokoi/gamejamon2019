@@ -8,18 +8,19 @@ public class Player_manager : MonoBehaviour
     public GameObject body;
     private Mouth_class mouth;
     private Glass last_glass_class;
+    public GameObject myHand;
 
     #region player states
     public enum player_number { player_1, player_2 };
     public player_number my_player;
     public float alcohol_stamina;
     public float MAX_ALCOHOL_STAMINA;
-    public int drinked_glasses;
-    private float sake;
-    private float vodka;
-    private float absenta;
-    private float whisky;
-    private float wine;
+    public float drinked_glasses;
+    public float sake;
+    public float vodka;
+    public float absenta;
+    public float whisky;
+    public float wine;
     #endregion
 
     #region shoulder
@@ -46,6 +47,7 @@ public class Player_manager : MonoBehaviour
 
     #region HUD
     private Image barraBorracho;
+    public TextMesh pointText;
     #endregion
 
     //Si es el player de la izquierda
@@ -125,19 +127,22 @@ public class Player_manager : MonoBehaviour
                 switch (last_glass_class.my_shot)
                 {
                     case Glass.kind_shot.sake:
-                        alcohol_stamina = 30 * (1 - sake);
+                        alcohol_stamina += 30 * (1 - sake);
                         break;
                     case Glass.kind_shot.absenta:
-                        alcohol_stamina = 30 * (1 - absenta);
+                        alcohol_stamina += 30 * (1 - absenta);
                         break;
                     case Glass.kind_shot.vodka:
-                        alcohol_stamina = 30 * (1 - vodka);
+                        alcohol_stamina += 30 * (1 - vodka);
                         break;
                     case Glass.kind_shot.whisky:
-                        alcohol_stamina = 30 * (1 - whisky);
+                        alcohol_stamina += 30 * (1 - whisky);
                         break;
                     case Glass.kind_shot.wine:
-                        alcohol_stamina = 30 * (1 - wine);
+                        alcohol_stamina += 30 * (1 - wine);
+                        break;
+                    default:
+                        alcohol_stamina += 30;
                         break;
                 }
             };
@@ -145,8 +150,15 @@ public class Player_manager : MonoBehaviour
             barraBorracho.fillAmount = (alcohol_stamina / MAX_ALCOHOL_STAMINA);
         }
 
-
-
+        pointText.text = drinked_glasses.ToString();
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        var glass = collision.gameObject.GetComponent<Glass>();
+        if (glass && glass.hand != null && glass.hand != myHand)
+        {
+            drinked_glasses -= 0.5f;
+        }
+    }
 }

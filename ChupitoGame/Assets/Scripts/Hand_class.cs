@@ -10,10 +10,14 @@ public class Hand_class : MonoBehaviour
     private SpriteRenderer hand_glass_sprite;
     public GameObject other_hand;
 
+    public bool isleftHand;    
 
     //Agarrando
     [HideInInspector]
     public bool agarrando;
+
+    //Key code
+    public KeyCode myControl;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +31,7 @@ public class Hand_class : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space)) CatchGlass();
+        if (Input.GetKey(myControl)) CatchGlass();
         else {
             agarrando = false;
            

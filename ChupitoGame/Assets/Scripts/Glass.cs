@@ -42,7 +42,7 @@ public class Glass : MonoBehaviour
     [HideInInspector]
     public GameObject hand;
 
-    public enum kind_shot {sake,vodka,absenta,wine,whisky};
+    public enum kind_shot { sake, vodka, absenta, wine, whisky };
     public kind_shot my_shot;
 
     // Start is called before the first frame update
@@ -65,7 +65,7 @@ public class Glass : MonoBehaviour
             {
                 //Vector que calcula la posicion
                 Vector3 tempVect;
-               
+
 
                 //Movimiento
                 if (IsLeft)
@@ -81,7 +81,7 @@ public class Glass : MonoBehaviour
             #region Lanzamiento
             else
             {
-                if (Input.GetKeyDown(KeyCode.Space) && !onAir)
+                if (Input.GetKeyDown(hand.GetComponent<Hand_class>().myControl) && !onAir)
                 {
                     ThrowRigidbody();
                 }
@@ -119,9 +119,11 @@ public class Glass : MonoBehaviour
         onAir = true;
         rb.isKinematic = false;
         rb.WakeUp();
-        var multiplicador = 1;//(GlassManager.player_manager.my_shoulder.GetAxixValue() + GlassManager.player_manager.my_elbow_down.GetAxixValue() + GlassManager.player_manager.my_elbow_up.GetAxixValue())/3;
-        rb.AddForce(rb.transform.right * force_magnitude * multiplicador, ForceMode2D.Impulse);
-        Debug.Log(force_magnitude * multiplicador + " axis: " + multiplicador);
+        if (hand.GetComponent<Hand_class>().isleftHand)
+            rb.AddForce(Vector2.right * force_magnitude, ForceMode2D.Impulse);
+        else
+            rb.AddForce(Vector2.left * force_magnitude, ForceMode2D.Impulse);
+
         rb.AddTorque(force_magnitude * torque_multiplier);
         this.transform.parent = GlassManager.poolGlass.transform;
         Invoke("destroy", 5);
@@ -129,12 +131,14 @@ public class Glass : MonoBehaviour
     }
     public bool GetContentGlass() { return full; }
     public void DrinkGlass() { full = false; }
-    public void destroy() {
+    public void destroy()
+    {
         CancelInvoke("destroy");
         GlassManager.RemoveGlass(this.gameObject);
     }
 
-    public void removeCollider() {
+    public void removeCollider()
+    {
         GetComponent<Collider2D>().isTrigger = true;
     }
 
