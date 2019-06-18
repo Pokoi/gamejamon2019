@@ -15,11 +15,11 @@ public class Player_manager : MonoBehaviour
     public float alcohol_stamina;
     public float MAX_ALCOHOL_STAMINA;
     public int drinked_glasses;
-    public float sake;
-    public float vodka;
-    public float absenta;
-    public float whisky;
-    public float wine;
+    private float sake;
+    private float vodka;
+    private float absenta;
+    private float whisky;
+    private float wine;
     #endregion
 
     #region shoulder
@@ -69,9 +69,25 @@ public class Player_manager : MonoBehaviour
         my_elbow_up = new Elbow_up_class();
         my_elbow_down = new Elbow_down_class();
         if (my_player == player_number.player_1)
+        {
+            sake = PlayerPrefs.GetInt("sake");
+            vodka = PlayerPrefs.GetInt("vodka");
+            absenta = PlayerPrefs.GetInt("absenta");
+            whisky = PlayerPrefs.GetInt("whisky");
+            wine = PlayerPrefs.GetInt("wine");
             my_shoulder.Start(my_shoulder_transform, max_angle_shoulder, min_angle_shoulder, active_key_shoulder, aceleration_axis_shoulder, speed_animation_shoulder, true);
+
+        }
         else
+        {
+            sake = PlayerPrefs.GetInt("sake_2");
+            vodka = PlayerPrefs.GetInt("vodka_2");
+            absenta = PlayerPrefs.GetInt("absenta_2");
+            whisky = PlayerPrefs.GetInt("whisky_2");
+            wine = PlayerPrefs.GetInt("wine_2");
             my_shoulder.Start(my_shoulder_transform, max_angle_shoulder, min_angle_shoulder, active_key_shoulder, aceleration_axis_shoulder, speed_animation_shoulder, false);
+
+        }
 
         my_elbow_up.Start(my_elbow_transform, max_angle_elbow, min_angle_elbow, active_key_elbow_up, aceleration_axis_elbow, speed_animation_elbow);
         my_elbow_down.Start(my_elbow_transform, max_angle_elbow, min_angle_elbow, active_key_elbow_down, aceleration_axis_elbow, speed_animation_elbow);
