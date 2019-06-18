@@ -147,6 +147,9 @@ public class Player_manager : MonoBehaviour
                 }
             };
             alcohol_stamina = alcohol_stamina - 0.05 < 0 ? 0 : alcohol_stamina - 0.05F;
+            if (alcohol_stamina >= MAX_ALCOHOL_STAMINA) {
+                GameManager.OnGameEnds(GameManager.CheckWinner());
+            }
             barraBorracho.fillAmount = (alcohol_stamina / MAX_ALCOHOL_STAMINA);
         }
 

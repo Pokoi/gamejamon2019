@@ -24,9 +24,11 @@ public class Game_manager : MonoBehaviour
     //Lista de vasos
     public List<kind_shot> listaShots;
 
-    void generateListaShot() {
+    void generateListaShot()
+    {
 
-        for (int i = 0; i < game_duration_in_seconds; i++) {
+        for (int i = 0; i < game_duration_in_seconds; i++)
+        {
             listaShots.Add((kind_shot)UnityEngine.Random.Range(0, 4));
         }
 
@@ -38,11 +40,13 @@ public class Game_manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (current_game_phase == GamePhases.playing) {
+        if (current_game_phase == GamePhases.playing)
+        {
             remaining_seconds -= Time.deltaTime;
             int minutes = (int)remaining_seconds / 60;
             int seconds = (int)remaining_seconds % 60;
             remaining_time.text = minutes < 10 ? "0" : "";
+            remaining_time.text += minutes;
             remaining_time.text += ":";
             remaining_time.text += seconds < 10 ? "0" : "";
             remaining_time.text += seconds;
@@ -53,7 +57,7 @@ public class Game_manager : MonoBehaviour
 
     internal List<kind_shot> getListShot()
     {
-        return listaShots;
+        return new List<kind_shot>(listaShots);
     }
 
     /// <summary>
@@ -68,7 +72,7 @@ public class Game_manager : MonoBehaviour
     /// <summary>
     /// Reloads the scene
     /// </summary>
-    public void ReloadGame() { SceneManager.LoadScene(SceneManager.GetActiveScene().name); }
+    public void ReloadGame() { SceneManager.LoadScene("MenuCreatePlayer"); }
 
     /// <summary>
     /// When the game is finished, this method is called
@@ -86,7 +90,8 @@ public class Game_manager : MonoBehaviour
     /// Check which player is the winner of the match and returns his points
     /// </summary>
     /// <returns></returns>
-    public float CheckWinner() {
+    public float CheckWinner()
+    {
         is_player_one_winner = player_one.drinked_glasses > player_two.drinked_glasses;
         return is_player_one_winner ? player_one.drinked_glasses : player_two.drinked_glasses;
     }

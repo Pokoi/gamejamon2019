@@ -139,7 +139,7 @@ public class Glass : MonoBehaviour
 
         rb.AddTorque(force_magnitude * torque_multiplier);
         this.transform.parent = GlassManager.poolGlass.transform;
-        Invoke("destroy", 5);
+        Invoke("destroy", 3);
 
     }
     public bool GetContentGlass() { return full; }

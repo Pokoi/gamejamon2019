@@ -29,6 +29,9 @@ public class GlassManager : MonoBehaviour
 
     //Lista de Shot
     public List<kind_shot> shots;
+    //Imagen
+    public SpriteRenderer NextShoot;
+
 
     // Start is called before the first frame update
     void Start()
@@ -67,6 +70,8 @@ public class GlassManager : MonoBehaviour
             objetosActivos.Add(Instantiate(glass, originPosition, Quaternion.identity));
             objetosActivos.Last().GetComponent<Glass>().restartObject(this.gameObject, shots.First());
             shots.RemoveAt(0);
+            var sprite = Resources.Load<Sprite>("Bottles/" + shots.First()+ "_bottle");
+            NextShoot.sprite = sprite;
         }
         else
         {
@@ -75,6 +80,8 @@ public class GlassManager : MonoBehaviour
             objetosActivos.Last().transform.rotation = Quaternion.identity;
             objetosActivos.Last().GetComponent<Glass>().restartObject(this.gameObject, shots.First());
             shots.RemoveAt(0);
+            var sprite = Resources.Load<Sprite>("Bottles/" + shots.First() + "_bottle");
+            NextShoot.sprite = sprite;
         }
     }
 
