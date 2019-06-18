@@ -24,6 +24,11 @@ public class GlassManager : MonoBehaviour
     //Brazo
     public Player_manager player_manager;
 
+    //Gamemanager
+    public Game_manager gameManager;
+
+    //Lista de Shot
+    public List<kind_shot> shots;
 
     // Start is called before the first frame update
     void Start()
@@ -37,13 +42,16 @@ public class GlassManager : MonoBehaviour
         poolGlass = new GameObject();
         poolGlass.name = "PoolGlass";
         Instantiate(poolGlass, originPosition, Quaternion.identity);
+
+        gameManager = GameObject.Find("GameManager").GetComponent<Game_manager>();
+        shots = gameManager.getListShot();
         spawnGlass();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.C)) //|| !player_manager.myHand.GetComponent<Hand_class>().agarrando)
             spawnGlass();
     }
 
@@ -57,14 +65,16 @@ public class GlassManager : MonoBehaviour
         if (objetosDesactivados.Count == 0)
         {
             objetosActivos.Add(Instantiate(glass, originPosition, Quaternion.identity));
-            objetosActivos.Last().GetComponent<Glass>().restartObject(this.gameObject);
+            objetosActivos.Last().GetComponent<Glass>().restartObject(this.gameObject, shots.First());
+            shots.RemoveAt(0);
         }
         else
         {
             objetosActivos.Add(objetosDesactivados.First());
             objetosDesactivados.Remove(objetosDesactivados.First());
-            objetosActivos.Last().transform.position = originPosition;
-            objetosActivos.Last().GetComponent<Glass>().restartObject(this.gameObject);
+            objetosActivos.Last().transform.rotation = Quaternion.identity;
+            objetosActivos.Last().GetComponent<Glass>().restartObject(this.gameObject, shots.First());
+            shots.RemoveAt(0);
         }
     }
 

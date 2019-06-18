@@ -126,19 +126,19 @@ public class Player_manager : MonoBehaviour
                 drinked_glasses++;
                 switch (last_glass_class.my_shot)
                 {
-                    case Glass.kind_shot.sake:
+                    case kind_shot.sake:
                         alcohol_stamina += 30 * (1 - sake);
                         break;
-                    case Glass.kind_shot.absenta:
+                    case kind_shot.absenta:
                         alcohol_stamina += 30 * (1 - absenta);
                         break;
-                    case Glass.kind_shot.vodka:
+                    case kind_shot.vodka:
                         alcohol_stamina += 30 * (1 - vodka);
                         break;
-                    case Glass.kind_shot.whisky:
+                    case kind_shot.whisky:
                         alcohol_stamina += 30 * (1 - whisky);
                         break;
-                    case Glass.kind_shot.wine:
+                    case kind_shot.wine:
                         alcohol_stamina += 30 * (1 - wine);
                         break;
                     default:

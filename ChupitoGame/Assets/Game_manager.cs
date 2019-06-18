@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using System;
 
 public class Game_manager : MonoBehaviour
 {
@@ -21,8 +21,19 @@ public class Game_manager : MonoBehaviour
     public enum GamePhases { playing, finished }
     public GamePhases current_game_phase;
 
+    //Lista de vasos
+    public List<kind_shot> listaShots;
+
+    void generateListaShot() {
+
+        for (int i = 0; i < game_duration_in_seconds; i++) {
+            listaShots.Add((kind_shot)UnityEngine.Random.Range(0, 4));
+        }
+
+    }
+
     // Start is called before the first frame update
-    void Start() { current_game_phase = GamePhases.playing; remaining_seconds = game_duration_in_seconds; }
+    void Awake() { current_game_phase = GamePhases.playing; remaining_seconds = game_duration_in_seconds; generateListaShot(); }
 
     // Update is called once per frame
     void Update()
@@ -38,6 +49,11 @@ public class Game_manager : MonoBehaviour
 
             if (remaining_seconds <= 0) OnGameEnds(CheckWinner());
         }
+    }
+
+    internal List<kind_shot> getListShot()
+    {
+        return listaShots;
     }
 
     /// <summary>

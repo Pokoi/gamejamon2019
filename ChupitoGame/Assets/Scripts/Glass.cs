@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum kind_shot { sake, vodka, absenta, wine, whisky };
+
+
 public class Glass : MonoBehaviour
 {
 
@@ -42,7 +45,6 @@ public class Glass : MonoBehaviour
     [HideInInspector]
     public GameObject hand;
 
-    public enum kind_shot { sake, vodka, absenta, wine, whisky };
     public kind_shot my_shot;
 
     // Start is called before the first frame update
@@ -52,6 +54,15 @@ public class Glass : MonoBehaviour
         render = GetComponent<Renderer>();
         table = GameObject.Find("Table");
         full = true;
+        changeChupito((kind_shot)1);
+    }
+
+    private void changeChupito(kind_shot shot)
+    {
+        my_shot = shot;
+        var sprite = Resources.Load<Sprite>("Props/" + my_shot + "_shot");
+        gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
+
     }
 
     // Update is called once per frame
@@ -96,12 +107,13 @@ public class Glass : MonoBehaviour
 
     }
 
-    internal void restartObject(GameObject _padre)
+    internal void restartObject(GameObject _padre, kind_shot _shot)
     {
         isActive = true;
         this.gameObject.SetActive(true);
         agarrado = false;
         GlassManager = _padre.GetComponent<GlassManager>();
+        transform.position = GlassManager.originPosition;
         IsLeft = GlassManager.direccionDeSpawnIsLeft;
         if (rb != null)
         {
@@ -112,6 +124,7 @@ public class Glass : MonoBehaviour
         onAir = false;
         full = true;
         GetComponent<Collider2D>().isTrigger = false;
+        changeChupito(_shot);
     }
 
     private void ThrowRigidbody()
