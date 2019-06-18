@@ -42,6 +42,9 @@ public class Glass : MonoBehaviour
     [HideInInspector]
     public GameObject hand;
 
+    public enum kind_shot {sake,vodka,absenta,wine,whisky};
+    public kind_shot my_shot;
+
     // Start is called before the first frame update
     void Awake()
     {

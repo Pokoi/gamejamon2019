@@ -596,6 +596,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1982771317, guid: 435295b4bc00d7c418c274a6e50dbd94, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2b037be1570c8a147a0bbbaebe410607,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 435295b4bc00d7c418c274a6e50dbd94, type: 3}
 --- !u!1 &323507739
@@ -3760,6 +3765,11 @@ PrefabInstance:
       propertyPath: my_player
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1982771317, guid: 435295b4bc00d7c418c274a6e50dbd94, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2ca4eb0a49482d1419bd8c275771bcee,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 435295b4bc00d7c418c274a6e50dbd94, type: 3}
 --- !u!1 &2040633431

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Mouth_class : MonoBehaviour
 {
     private int drinked_glasses;
+    private Glass last_glass_class;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,7 @@ public class Mouth_class : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<Glass>().GetContentGlass())
             {
+                last_glass_class = collision.gameObject.GetComponent<Glass>();
                 drinked_glasses++;                
                 collision.gameObject.GetComponent<Glass>().DrinkGlass();
                 collision.gameObject.GetComponent<Glass>().GlassManager.spawnGlass();
@@ -36,5 +38,9 @@ public class Mouth_class : MonoBehaviour
         drinked_glasses = 0;
         
         return glasses > 0;
+    }
+    public Glass GetLastGlass()
+    {
+        return last_glass_class;
     }
 }

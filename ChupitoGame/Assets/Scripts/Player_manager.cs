@@ -7,6 +7,7 @@ public class Player_manager : MonoBehaviour
 {
     public GameObject body;
     private Mouth_class mouth;
+    private Glass last_glass_class;
     #region player states
     public enum player_number{player_1,player_2};
     public player_number my_player;
@@ -17,7 +18,7 @@ public class Player_manager : MonoBehaviour
     public float vodka;
     public float absenta;
     public float whisky;
-    public float vine;
+    public float wine;
     #endregion
 
     #region shoulder
@@ -49,6 +50,13 @@ public class Player_manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //normalizamos los valores 
+        sake = sake / 10;
+        vodka = vodka / 10;
+        absenta = absenta / 10;
+        whisky = whisky / 10;
+        wine = wine / 10;
+
         mouth = body.GetComponent<Mouth_class>();
         my_shoulder = new Shoulder_class();
         my_elbow_up = new Elbow_up_class();
@@ -80,8 +88,26 @@ public class Player_manager : MonoBehaviour
 
 
         if (mouth.GetDrinkedGlass()) {
+            last_glass_class = mouth.GetLastGlass();
             drinked_glasses++;
-            alcohol_stamina = drinked_glasses * 25;
+            switch (last_glass_class.my_shot)
+            {
+                case Glass.kind_shot.sake:
+                    alcohol_stamina = 30 * sake;
+                    break;
+                case Glass.kind_shot.absenta:
+                    alcohol_stamina = 30 * absenta;
+                    break;
+                case Glass.kind_shot.vodka:
+                    alcohol_stamina = 30 * vodka;
+                    break;
+                case Glass.kind_shot.whisky:
+                    alcohol_stamina = 30 * whisky;
+                    break;
+                case Glass.kind_shot.wine:
+                    alcohol_stamina = 30 * wine;
+                    break;
+            }
         };
         alcohol_stamina = alcohol_stamina - 0.05 < 0 ? 0 : alcohol_stamina - 0.05F;
         BarraborrachoLeft.fillAmount = (alcohol_stamina / MAX_ALCOHOL_STAMINA);
