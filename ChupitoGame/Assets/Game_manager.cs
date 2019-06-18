@@ -57,7 +57,7 @@ public class Game_manager : MonoBehaviour
     /// <summary>
     /// When the game is finished, this method is called
     /// </summary>
-    public void OnGameEnds(int _winner_points)
+    public void OnGameEnds(float _winner_points)
     {
         current_game_phase = GamePhases.finished;
         game_canvas.gameObject.SetActive(false);
@@ -70,5 +70,8 @@ public class Game_manager : MonoBehaviour
     /// Check which player is the winner of the match and returns his points
     /// </summary>
     /// <returns></returns>
-    public int CheckWinner() { is_player_one_winner = player_one.drinked_glasses > player_two.drinked_glasses; return is_player_one_winner ? player_one.drinked_glasses : player_two.drinked_glasses; }
+    public float CheckWinner() {
+        is_player_one_winner = player_one.drinked_glasses > player_two.drinked_glasses;
+        return is_player_one_winner ? player_one.drinked_glasses : player_two.drinked_glasses;
+    }
 }
