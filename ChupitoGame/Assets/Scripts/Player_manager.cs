@@ -8,13 +8,14 @@ public class Player_manager : MonoBehaviour
     public GameObject body;
     private Mouth_class mouth;
     private Glass last_glass_class;
+    public GameObject myHand;
 
     #region player states
     public enum player_number { player_1, player_2 };
     public player_number my_player;
     public float alcohol_stamina;
     public float MAX_ALCOHOL_STAMINA;
-    public int drinked_glasses;
+    public float drinked_glasses;
     public float sake;
     public float vodka;
     public float absenta;
@@ -46,6 +47,7 @@ public class Player_manager : MonoBehaviour
 
     #region HUD
     private Image barraBorracho;
+    public TextMesh pointText;
     #endregion
 
     //Si es el player de la izquierda
@@ -69,9 +71,25 @@ public class Player_manager : MonoBehaviour
         my_elbow_up = new Elbow_up_class();
         my_elbow_down = new Elbow_down_class();
         if (my_player == player_number.player_1)
+        {
+            sake = PlayerPrefs.GetInt("sake");
+            vodka = PlayerPrefs.GetInt("vodka");
+            absenta = PlayerPrefs.GetInt("absenta");
+            whisky = PlayerPrefs.GetInt("whisky");
+            wine = PlayerPrefs.GetInt("wine");
             my_shoulder.Start(my_shoulder_transform, max_angle_shoulder, min_angle_shoulder, active_key_shoulder, aceleration_axis_shoulder, speed_animation_shoulder, true);
+
+        }
         else
+        {
+            sake = PlayerPrefs.GetInt("sake_2");
+            vodka = PlayerPrefs.GetInt("vodka_2");
+            absenta = PlayerPrefs.GetInt("absenta_2");
+            whisky = PlayerPrefs.GetInt("whisky_2");
+            wine = PlayerPrefs.GetInt("wine_2");
             my_shoulder.Start(my_shoulder_transform, max_angle_shoulder, min_angle_shoulder, active_key_shoulder, aceleration_axis_shoulder, speed_animation_shoulder, false);
+
+        }
 
         my_elbow_up.Start(my_elbow_transform, max_angle_elbow, min_angle_elbow, active_key_elbow_up, aceleration_axis_elbow, speed_animation_elbow);
         my_elbow_down.Start(my_elbow_transform, max_angle_elbow, min_angle_elbow, active_key_elbow_down, aceleration_axis_elbow, speed_animation_elbow);
@@ -109,19 +127,22 @@ public class Player_manager : MonoBehaviour
                 switch (last_glass_class.my_shot)
                 {
                     case Glass.kind_shot.sake:
-                        alcohol_stamina = 30 * (1 - sake);
+                        alcohol_stamina += 30 * (1 - sake);
                         break;
                     case Glass.kind_shot.absenta:
-                        alcohol_stamina = 30 * (1 - absenta);
+                        alcohol_stamina += 30 * (1 - absenta);
                         break;
                     case Glass.kind_shot.vodka:
-                        alcohol_stamina = 30 * (1 - vodka);
+                        alcohol_stamina += 30 * (1 - vodka);
                         break;
                     case Glass.kind_shot.whisky:
-                        alcohol_stamina = 30 * (1 - whisky);
+                        alcohol_stamina += 30 * (1 - whisky);
                         break;
                     case Glass.kind_shot.wine:
-                        alcohol_stamina = 30 * (1 - wine);
+                        alcohol_stamina += 30 * (1 - wine);
+                        break;
+                    default:
+                        alcohol_stamina += 30;
                         break;
                 }
             };
@@ -129,8 +150,15 @@ public class Player_manager : MonoBehaviour
             barraBorracho.fillAmount = (alcohol_stamina / MAX_ALCOHOL_STAMINA);
         }
 
-
-
+        pointText.text = drinked_glasses.ToString();
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        var glass = collision.gameObject.GetComponent<Glass>();
+        if (glass && glass.hand != null && glass.hand != myHand)
+        {
+            drinked_glasses -= 0.5f;
+        }
+    }
 }

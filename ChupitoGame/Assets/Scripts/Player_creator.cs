@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Player_creator : MonoBehaviour
@@ -34,7 +35,12 @@ public class Player_creator : MonoBehaviour
     public void SetPointsSake(int n)
     {
         points += sake;
-        if (points >= n)
+        if (n == sake)
+        {
+            sake = 0;
+        }
+       
+        else if (points >= n)
         {
             
             sake = n;
@@ -57,12 +63,17 @@ public class Player_creator : MonoBehaviour
             //    buttons_sake[i].gameObject.GetComponent<Image>().color = new Color(138, 138, 138);
         }
         puntos_player_1.text = points.ToString() + "/10";
+        CheckReady();
 
     }
     public void SetPointsVodka(int n)
     {
         points += vodka;
-        if (points >= n)
+        if (n == vodka)
+        {
+            vodka = 0;
+        }
+        else if (points >= n)
         {
             
             vodka = n;
@@ -85,11 +96,16 @@ public class Player_creator : MonoBehaviour
             //    buttons_sake[i].gameObject.GetComponent<Image>().color = new Color(138, 138, 138);
         }
         puntos_player_1.text = points.ToString() + "/10";
+        CheckReady();
     }
     public void SetPointsAbsenta(int n)
     {
         points += absenta;
-        if (points >= n)
+        if (n == absenta)
+        {
+            absenta = 0;
+        }
+        else if (points >= n)
         {
 
             absenta = n;
@@ -112,11 +128,16 @@ public class Player_creator : MonoBehaviour
             //    buttons_sake[i].gameObject.GetComponent<Image>().color = new Color(138, 138, 138);
         }
         puntos_player_1.text = points.ToString() + "/10";
+        CheckReady();
     }
     public void SetPointsWhisky(int n)
     {
         points += whisky;
-        if (points >= n)
+        if (n == whisky)
+        {
+            whisky = 0;
+        }
+        else if (points >= n)
         {
 
             whisky = n;
@@ -139,11 +160,16 @@ public class Player_creator : MonoBehaviour
             //    buttons_sake[i].gameObject.GetComponent<Image>().color = new Color(138, 138, 138);
         }
         puntos_player_1.text = points.ToString() + "/10";
+        CheckReady();
     }
     public void SetPointsWine(int n)
     {
         points += wine;
-        if (points >= n)
+        if (n == wine)
+        {
+            wine = 0;
+        }
+        else if (points >= n)
         {
 
             wine = n;
@@ -166,13 +192,20 @@ public class Player_creator : MonoBehaviour
             //    buttons_sake[i].gameObject.GetComponent<Image>().color = new Color(138, 138, 138);
         }
         puntos_player_1.text = points.ToString() + "/10";
+        CheckReady();
     }
+
+    public GameObject button_ready;
 
 
     public void SetPointsSake2(int n)
     {
         points_2 += sake_2;
-        if (points_2 >= n)
+        if (n == sake_2)
+        {
+            sake_2 = 0;
+        }
+        else if (points_2 >= n)
         {
 
             sake_2 = n;
@@ -194,13 +227,18 @@ public class Player_creator : MonoBehaviour
             //else
             //    buttons_sake[i].gameObject.GetComponent<Image>().color = new Color(138, 138, 138);
         }
-        puntos_player_2.text = points.ToString() + "/10";
+        puntos_player_2.text = points_2.ToString() + "/10";
+        CheckReady();
 
     }
     public void SetPointsVodka2(int n)
     {
         points_2 += vodka_2;
-        if (points_2 >= n)
+        if (n == vodka_2)
+        {
+            vodka_2 = 0;
+        }
+        else if (points_2 >= n)
         {
 
             vodka_2 = n;
@@ -222,12 +260,17 @@ public class Player_creator : MonoBehaviour
             //else
             //    buttons_sake[i].gameObject.GetComponent<Image>().color = new Color(138, 138, 138);
         }
-        puntos_player_2.text = points.ToString() + "/10";
+        puntos_player_2.text = points_2.ToString() + "/10";
+        CheckReady();
     }
     public void SetPointsAbsenta2(int n)
     {
         points_2 += absenta_2;
-        if (points_2 >= n)
+        if (n == absenta_2)
+        {
+            absenta_2 = 0;
+        }
+        else if (points_2 >= n)
         {
 
             absenta_2 = n;
@@ -249,12 +292,17 @@ public class Player_creator : MonoBehaviour
             //else
             //    buttons_sake[i].gameObject.GetComponent<Image>().color = new Color(138, 138, 138);
         }
-        puntos_player_2.text = points.ToString() + "/10";
+        puntos_player_2.text = points_2.ToString() + "/10";
+        CheckReady();
     }
     public void SetPointsWhisky2(int n)
     {
         points_2 += whisky_2;
-        if (points_2 >= n)
+        if (n == whisky_2)
+        {
+            whisky_2 = 0;
+        }
+        else if (points_2 >= n)
         {
 
             whisky_2 = n;
@@ -276,12 +324,17 @@ public class Player_creator : MonoBehaviour
             //else
             //    buttons_sake[i].gameObject.GetComponent<Image>().color = new Color(138, 138, 138);
         }
-        puntos_player_2.text = points.ToString() + "/10";
+        puntos_player_2.text = points_2.ToString() + "/10";
+        CheckReady();
     }
     public void SetPointsWine2(int n)
     {
         points_2 += wine_2;
-        if (points_2 >= n)
+        if (n == wine_2)
+        {
+            wine_2 = 0;
+        }
+        else if (points_2 >= n)
         {
 
             wine_2 = n;
@@ -303,7 +356,38 @@ public class Player_creator : MonoBehaviour
             //else
             //    buttons_sake[i].gameObject.GetComponent<Image>().color = new Color(138, 138, 138);
         }
-        puntos_player_2.text = points.ToString() + "/10";
+        puntos_player_2.text = points_2.ToString() + "/10";
+        CheckReady();
+    }
+    private void CheckReady()
+    {
+        if (points == 0 && points_2 == 0)
+        {
+            Debug.Log("im ready");
+            button_ready.GetComponentInChildren<Text>().color = new Color32(255, 255, 255, 255);
+        }
+        else
+        {
+            button_ready.GetComponentInChildren<Text>().color = new Color32(138, 138, 138, 255);
+
+        }
+    }
+    public void Play()
+    {
+        if (points == 0 && points_2 == 0)
+        {
+            PlayerPrefs.SetInt("sake", sake);
+            PlayerPrefs.SetInt("sake_2", sake_2);
+            PlayerPrefs.SetInt("vodka", vodka);
+            PlayerPrefs.SetInt("vodka_2", vodka_2);
+            PlayerPrefs.SetInt("absenta", absenta);
+            PlayerPrefs.SetInt("absenta_2", absenta_2);
+            PlayerPrefs.SetInt("whisky", whisky);
+            PlayerPrefs.SetInt("whisky_2", whisky_2);
+            PlayerPrefs.SetInt("wine", wine);
+            PlayerPrefs.SetInt("wine_2", wine_2);
+            SceneManager.LoadScene("PhysicsTest");
+        }
     }
 
 }
