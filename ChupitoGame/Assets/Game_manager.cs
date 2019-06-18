@@ -41,6 +41,15 @@ public class Game_manager : MonoBehaviour
     }
 
     /// <summary>
+    /// Determina si estamos jugando
+    /// </summary>
+    /// <returns></returns>
+    public bool isPlaying()
+    {
+        return current_game_phase == GamePhases.playing;
+    }
+
+    /// <summary>
     /// Reloads the scene
     /// </summary>
     public void ReloadGame() { SceneManager.LoadScene(SceneManager.GetActiveScene().name); }

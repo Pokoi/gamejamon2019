@@ -37,8 +37,6 @@ public class GlassManager : MonoBehaviour
         poolGlass = new GameObject();
         poolGlass.name = "PoolGlass";
         Instantiate(poolGlass, originPosition, Quaternion.identity);
-        //Obtenemos el player Manager
-        player_manager = GameObject.Find("TestPerson").GetComponent<Player_manager>();
         spawnGlass();
     }
 
@@ -48,6 +46,8 @@ public class GlassManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C))
             spawnGlass();
     }
+
+
 
     /// <summary>
     /// Instancia un vaso en la posicion original
@@ -70,7 +70,8 @@ public class GlassManager : MonoBehaviour
 
     internal void RemoveGlass(GameObject _toRemove)
     {
-        if (objetosActivos.Count <= 1) {
+        if (objetosActivos.Count <= 1)
+        {
             spawnGlass();
         }
 
