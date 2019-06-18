@@ -8,12 +8,14 @@ public class Player_manager : MonoBehaviour
     public GameObject body;
     private Mouth_class mouth;
     #region player states
+    public enum player_number{player_1,player_2};
+    public player_number my_player;
     public float alcohol_stamina;
     public float MAX_ALCOHOL_STAMINA;
     public int drinked_glasses;
     public float sake;
     public float vodka;
-    public float ron;
+    public float absenta;
     public float whisky;
     public float vine;
     #endregion
@@ -51,7 +53,11 @@ public class Player_manager : MonoBehaviour
         my_shoulder = new Shoulder_class();
         my_elbow_up = new Elbow_up_class();
         my_elbow_down = new Elbow_down_class();
-        my_shoulder.Start(my_shoulder_transform, max_angle_shoulder, min_angle_shoulder, active_key_shoulder, aceleration_axis_shoulder,speed_animation_shoulder);
+        if(my_player == player_number.player_1 )
+            my_shoulder.Start(my_shoulder_transform, max_angle_shoulder, min_angle_shoulder, active_key_shoulder, aceleration_axis_shoulder,speed_animation_shoulder,true);
+        else
+            my_shoulder.Start(my_shoulder_transform, max_angle_shoulder, min_angle_shoulder, active_key_shoulder, aceleration_axis_shoulder, speed_animation_shoulder, false);
+
         my_elbow_up.Start(my_elbow_transform, max_angle_elbow, min_angle_elbow, active_key_elbow_up, aceleration_axis_elbow,speed_animation_elbow);
         my_elbow_down.Start(my_elbow_transform, max_angle_elbow, min_angle_elbow, active_key_elbow_down, aceleration_axis_elbow,speed_animation_elbow);
 

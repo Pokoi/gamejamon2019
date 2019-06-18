@@ -7,7 +7,7 @@ public class Player_creator : MonoBehaviour
     public float points;
     public float sake;
     public float vodka;
-    public float ron;
+    public float absenta;
     public float whisky;
     public float vine;
 

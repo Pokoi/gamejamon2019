@@ -5,15 +5,20 @@ using UnityEngine;
 public class Shoulder_class : Joints_class
 {
     private float delta_time;
+    private bool player_number;
     public override void KeepKeyPress()
     {
         RotateUp(delta_time);
+       
         //throw new System.NotImplementedException();
     }
 
     public override void KeepKeyUp()
     {
-        ContinuousRotationDown(delta_time);
+        if (player_number)
+            ContinuousRotationDown(delta_time);
+        else
+            ContinuousRotationUp(delta_time);
         //throw new System.NotImplementedException();
     }
 
@@ -29,9 +34,10 @@ public class Shoulder_class : Joints_class
     }
 
     // Start is called before the first frame update
-    public void Start(Transform joint_transform, float max_angle, float min_angle, KeyCode active_key, float aceleration_axis, float speed_animation)
+    public void Start(Transform joint_transform, float max_angle, float min_angle, KeyCode active_key, float aceleration_axis, float speed_animation, bool player_number)
     {
         JointStart(joint_transform, max_angle, min_angle,active_key, aceleration_axis, speed_animation);
+        this.player_number = player_number;
         
     }
 
