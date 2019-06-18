@@ -15,7 +15,7 @@ public class Player_manager : MonoBehaviour
     public float vodka;
     public float ron;
     public float whisky;
-    public float vino;
+    public float vine;
     #endregion
 
     #region shoulder
@@ -68,6 +68,11 @@ public class Player_manager : MonoBehaviour
         my_shoulder.Update(Time.deltaTime);
         my_elbow_up.Update(Time.deltaTime);
         my_elbow_down.Update(Time.deltaTime);
+        my_shoulder.SetControlFeeling(alcohol_stamina, MAX_ALCOHOL_STAMINA);
+        my_elbow_up.SetControlFeeling(alcohol_stamina, MAX_ALCOHOL_STAMINA);
+        my_elbow_down.SetControlFeeling(alcohol_stamina, MAX_ALCOHOL_STAMINA);
+
+
         if (mouth.GetDrinkedGlass()) {
             drinked_glasses++;
             alcohol_stamina = drinked_glasses * 25;

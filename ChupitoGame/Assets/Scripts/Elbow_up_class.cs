@@ -13,6 +13,7 @@ public class Elbow_up_class : Joints_class
 
     public override void KeepKeyUp()
     {
+
         //throw new System.NotImplementedException();
     }
 

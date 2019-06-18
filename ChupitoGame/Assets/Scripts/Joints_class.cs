@@ -17,17 +17,20 @@ public abstract class Joints_class
     public KeyCode active_key;
     //velocidad con la que se incrementa el axis value
     public float speed_animation;
+    private float base_speed_animation;
+    private float base_max_angle;
+    private float base_min_angle;
     public float aceleration_axis;
     private Transform my_transform;
 
     protected void JointStart(Transform joint_transform, float max_angle, float min_angle, KeyCode active_key, float aceleration_axis, float speed_animation)
     {
         my_transform = joint_transform;
-        this.max_angle = max_angle;
-        this.min_angle = min_angle;
+        this.max_angle = this.base_max_angle = max_angle;
+        this.min_angle = this.base_min_angle = min_angle;
         this.active_key = active_key;
         this.aceleration_axis = aceleration_axis;
-        this.speed_animation = speed_animation;
+        this.speed_animation = this.base_speed_animation = speed_animation;
     }
 
 
@@ -75,13 +78,34 @@ public abstract class Joints_class
             my_transform.localEulerAngles -= new Vector3(0, 0, 1) * axis_value * speed_animation * deltaTime;
 
     }
-    protected void RestoreDown(float deltaTime)
+    protected void ContinuousRotationUp(float deltaTime)
+    {
+        if (my_transform.eulerAngles.z <= max_angle)
+            my_transform.eulerAngles += new Vector3(0, 0, 1) * max_last_axis_value * speed_animation * deltaTime;
+    }
+    protected void ContinuousRotationDown(float deltaTime)
     {
         if (my_transform.eulerAngles.z >= min_angle)
             my_transform.eulerAngles -= new Vector3(0, 0, 1) * max_last_axis_value * speed_animation * deltaTime;
     }
     public float GetAxixValue() {
         return axis_value;
+    }
+    public void SetControlFeeling(float modificator, float max_modificator)
+    {
+        if(modificator > 0)
+        {
+            if (base_speed_animation < modificator)
+            {
+                speed_animation = 0;
+            }
+            else
+            { 
+
+                speed_animation = base_speed_animation + modificator * 4;
+            }
+                
+        }
     }
     public abstract void KeepKeyPress();
     public abstract void KeepKeyUp();

@@ -26,7 +26,7 @@ public class Glass : MonoBehaviour
     public bool isActive = true;
 
     //Determina el movimiento
-    public int force_magnitude = 10;
+    public int force_magnitude = 500;
     public int torque_multiplier = 50;
 
     //Render del objeto
@@ -62,6 +62,7 @@ public class Glass : MonoBehaviour
             {
                 //Vector que calcula la posicion
                 Vector3 tempVect;
+               
 
                 //Movimiento
                 if (IsLeft)
@@ -115,9 +116,9 @@ public class Glass : MonoBehaviour
         onAir = true;
         rb.isKinematic = false;
         rb.WakeUp();
-        var multiplicador = GlassManager.player_manager.my_shoulder.GetAxixValue();
-
+        var multiplicador = 1;//(GlassManager.player_manager.my_shoulder.GetAxixValue() + GlassManager.player_manager.my_elbow_down.GetAxixValue() + GlassManager.player_manager.my_elbow_up.GetAxixValue())/3;
         rb.AddForce(rb.transform.right * force_magnitude * multiplicador, ForceMode2D.Impulse);
+        Debug.Log(force_magnitude * multiplicador + " axis: " + multiplicador);
         rb.AddTorque(force_magnitude * torque_multiplier);
         this.transform.parent = GlassManager.poolGlass.transform;
         Invoke("destroy", 5);

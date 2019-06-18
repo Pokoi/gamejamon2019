@@ -98,7 +98,7 @@ MonoBehaviour:
   agarrado: 0
   GlassManager: {fileID: 0}
   isActive: 1
-  force_magnitude: 10
+  force_magnitude: 20
   torque_multiplier: 1
   hand: {fileID: 0}
 --- !u!50 &3014047744601488604

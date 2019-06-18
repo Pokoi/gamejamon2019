@@ -13,7 +13,7 @@ public class Shoulder_class : Joints_class
 
     public override void KeepKeyUp()
     {
-        RestoreDown(delta_time);
+        ContinuousRotationDown(delta_time);
         //throw new System.NotImplementedException();
     }
 

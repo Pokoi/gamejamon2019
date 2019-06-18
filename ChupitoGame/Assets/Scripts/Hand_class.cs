@@ -6,7 +6,10 @@ using UnityEngine;
 public class Hand_class : MonoBehaviour
 {
     //Sprite de la mano
-    private SpriteRenderer sprite;
+    private SpriteRenderer hand_sprite;
+    private SpriteRenderer hand_glass_sprite;
+    public GameObject other_hand;
+
 
     //Agarrando
     [HideInInspector]
@@ -15,8 +18,9 @@ public class Hand_class : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        sprite = GetComponent<SpriteRenderer>();
-        sprite.color = Color.blue;
+        hand_glass_sprite = other_hand.GetComponent<SpriteRenderer>();
+        hand_sprite = GetComponent<SpriteRenderer>();
+        //hand_sprite.color = Color.blue;
 
     }
 
@@ -24,13 +28,15 @@ public class Hand_class : MonoBehaviour
     void Update()
     {
         if (Input.GetKey(KeyCode.Space)) CatchGlass();
-        else { sprite.color = Color.blue; agarrando = false; }
+        else {
+            agarrando = false;
+           
+        }
 
     }
 
     private void CatchGlass()
-    {
-        sprite.color = Color.red;
+    { 
         agarrando = true;
     }
 
@@ -43,7 +49,22 @@ public class Hand_class : MonoBehaviour
             glassComponent.agarrado = true;
             glassComponent.gameObject.GetComponent<Rigidbody2D>().Sleep();
             glassComponent.gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
+            glassComponent.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            hand_sprite.enabled = false;
+            hand_glass_sprite.enabled = true;
         }
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+
+        if (other.gameObject.GetComponent<Glass>())
+        {
+            other.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            hand_sprite.enabled = true;
+            hand_glass_sprite.enabled = false;
+
+        }
+
     }
 
 
